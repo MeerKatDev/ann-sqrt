@@ -49,22 +49,36 @@ for i in range(1, len(layers) - 1):
 weights.append((2*np.random.random((layers[i] + 1, layers[i + 1]))-1)/4)
 
 
+avgs = np.zeros(20)
+
 print("first set: 2-100")
 x = np.random.randint(2,101, size=20).tolist()
 y = np.sqrt(x)
-
 backpropagate(x, y)
+
 test_vals = [2, 4, 8, 9, 12, 16, 25, 27, 36, 49]
-for i in test_vals:
-  res = calculate(i)
-  print("The square root of ", i, " is ", round(res,3))
-  
+for k in range(0,30):
+  for i in range(len(test_vals)):
+    res = calculate(test_vals[i])
+    avgs[i] += res
+    #print("The square root of ", i, " is ", round(res,3))
+print("After 30 averages:")
+for i in range(len(test_vals)):
+  print("The square root of ", test_vals[i], " is ", round(avgs[i]/30.0,3))    
+
+max_int = 50.0
+avgs = np.zeros(20)
 print("second set: 2-50")
-x = [1, 4, 9, 16, 25, 36, 49]
+x = np.random.randint(2,51, size=20).tolist()
 y = np.sqrt(x)
-
 backpropagate(x, y)
+
 test_vals = [2, 4, 8, 9, 12, 16, 25, 27, 36, 49]
-for i in test_vals:
-  res = calculate(i)
-  print("The square root of ", i, " is ", round(res,3))
+for k in range(0,30):
+  for i in range(len(test_vals)):
+    res = calculate(test_vals[i])
+    avgs[i] += res
+    #print("The square root of ", i, " is ", round(res,3))
+print("After 30 averages:")
+for i in range(len(test_vals)):
+  print("The square root of ", test_vals[i], " is ", round(avgs[i]/30.0,3))   
